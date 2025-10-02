@@ -1,0 +1,96 @@
+/* Basic CSS for a simple portfolio page */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f7f7;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background: #222;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 1em 0;
+}
+
+h2 {
+    color: #1a73e8;
+    margin-top: 0;
+}
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.project-list li {
+    background: #f0f4f8;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background: #222;
+    color: #fff;
+    margin-top: 2rem;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 1.1em;
+    }
+    body {
+        padding: 10px;
+    }
+}
