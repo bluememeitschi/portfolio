@@ -49,14 +49,18 @@ section {
     margin-bottom: 2rem;
 }
 
-h1, h2 {
-    text-align: left;              /* Left align */
-    margin: 1em 0 0.5em 0;         /* Adjust margin for spacing */
-    background: #e3f2fd;           /* Light blue highlight */
-    padding: 0.5em 1em;            /* Padding for highlight effect */
-    border-radius: 8px;            /* Rounded corners */
-    display: inline-block;         /* Only as wide as content */
-    width: auto;
+h1,
+h2 {
+    text-align: right;
+    margin: 1em 0 0.5em 0;
+    background: #e3f2fd;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    display: block;
+    /* Make background stretch full width */
+    width: 100%;
+    /* Full width of parent */
+    box-sizing: border-box;
 }
 
 h2 {
@@ -91,8 +95,14 @@ footer {
 .profile-header {
     display: flex;
     align-items: center;
-    gap: 1.5em;
+    justify-content: space-between;
+    /* Pushes text left, image right */
     margin: 2em 0 1em 0;
+}
+
+.profile-header>div {
+    text-align: right;
+    /* Right-aligns h1 and h2 inside the div */
 }
 
 .profile-pic {
@@ -102,15 +112,19 @@ footer {
     border-radius: 50%;
     border: 3px solid #e3f2fd;
     background: #fff;
+    margin-left: 1em;
+    /* Space between text and image */
 }
 
 @media (max-width: 600px) {
     h1 {
         font-size: 1.5em;
     }
+
     h2 {
         font-size: 1.1em;
     }
+
     body {
         padding: 10px;
     }
