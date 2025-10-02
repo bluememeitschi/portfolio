@@ -51,17 +51,17 @@ section {
 
 h1,
 h2 {
+    background: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
     text-align: right;
-    margin: 1em 0 0.5em 0;
-    background: #e3f2fd;
-    padding: 0.5em 1em;
-    border-radius: 8px;
     display: block;
 }
 
 h2 {
     color: #1a73e8;
-    margin-top: 0;
+    margin-top: 0.2em;
 }
 
 .project-list {
@@ -92,13 +92,17 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Pushes text left, image right */
     margin: 2em 0 1em 0;
 }
 
-.profile-header>div {
+.profile-info {
+    background: #e3f2fd;
+    border-radius: 8px;
+    padding: 0.5em 1em;
     text-align: right;
-    /* Right-aligns h1 and h2 inside the div */
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
 }
 
 .profile-pic {
