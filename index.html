@@ -9,43 +9,62 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-    </nav>
-    <div class="profile-header">
-        <div class="profile-info">
-            <h1>Livia Zaugg</h1>
-            <h2>Portfolio</h2>
-        </div>
-        <img src="profile.jpg" alt="Profile picture of Livia Zaugg" class="profile-pic" />
+    <div class="layout">
+        <header class="site-header">
+            <nav class="navbar">
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+            </nav>
+        </header>
+
+        <aside class="sidebar-left" aria-label="Secondary navigation">
+            <!-- optional left column content (links, brief bio, tags) -->
+        </aside>
+
+        <main class="content">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <h1>Livia Zaugg</h1>
+                    <h2>Portfolio</h2>
+                </div>
+            </div>
+
+            <!-- Useless fact widget -->
+            <section class="fact-section">
+                <div class="fact-box">
+                    <p id="useless-fact">Loading a useless fact…</p>
+                    <button id="fact-refresh" type="button">Another fact</button>
+                </div>
+            </section>
+
+            <p>Welcome to my portfolio website! Here you can find information about my projects, skills, and
+                experiences.
+            </p>
+
+            <h3 id="projects">Projects</h3>
+            <p>Here are some of my recent projects:</p>
+            <ul class="project-list">
+                <li>Instagram Account</li>
+                <li>Webdesign for my Portfolio</li>
+            </ul>
+
+            <h3 id="skills">Skills</h3>
+            <p>Here are some of the skills I possess:</p>
+            <ul>
+                <li>Graphic Design</li>
+                <li>Project Management</li>
+                <li>Photography, Videography and Editing</li>
+            </ul>
+        </main>
+
+        <aside class="sidebar-right" aria-label="Profile">
+            <img src="profile.jpg" alt="Profile picture of Livia Zaugg" class="profile-pic" />
+        </aside>
+
+        <footer class="site-footer">
+            <p>Contact: livia.zaugg@email.com &nbsp;|&nbsp; © 2025 Livia Zaugg</p>
+        </footer>
     </div>
-
-    <!-- Useless fact widget -->
-    <section class="fact-section">
-        <div class="fact-box">
-            <p id="useless-fact">Loading a useless fact…</p>
-            <button id="fact-refresh" type="button">Another fact</button>
-        </div>
-    </section>
-
-    <p>Welcome to my portfolio website! Here you can find information about my projects, skills, and experiences.</p>
-    <h3 id="projects">Projects</h3>
-    <p>Here are some of my recent projects:</p>
-    <ul>
-        <li>Instagram Account HikingBirds</li>
-        <li>Webdesign for my Portfolio</li>
-    </ul>
-    <h3 id="skills">Skills</h3>
-    <p>Here are some of the skills I possess:</p>
-    <ul>
-        <li>Graphic Design</li>
-        <li>Project Management</li>
-        <li>Photography, Videography and Editing</li>
-    </ul>
-    <footer>
-        <p>Contact: livia.zaugg@email.com &nbsp;|&nbsp; © 2025 Livia Zaugg</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>

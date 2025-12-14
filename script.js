@@ -25,4 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('fact-refresh');
     if (btn) btn.addEventListener('click', fetchFact);
     fetchFact();
+
+    // highlight navbar links as sections come into view
+    const navLinks = document.querySelectorAll('.navbar a');
+    const sections = document.querySelectorAll('#projects, #skills');
+
+    if (navLinks.length && sections.length) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.id;
+                const link = document.querySelector(`.navbar a[href="#${id}"]`);
+                if (!link) return;
+                if (entry.isIntersecting) link.classList.add('active');
+                else link.classList.remove('active');
+            });
+        }, {
+            root: null,
+            rootMargin: `-35% 0% -35% 0%`,
+            threshold: 0
+        });
+
+        sections.forEach(s => observer.observe(s));
+    }
 });
