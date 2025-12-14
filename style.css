@@ -345,14 +345,19 @@ h3 {
     gap: 0.5rem;
 }
 
+/* allow viewport to size to image instead of forcing a fixed height */
 .carousel-viewport {
-    overflow: hidden;
     width: 100%;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(15, 32, 64, 0.06);
     background: linear-gradient(180deg, #fff, #fbfdff);
+    box-sizing: border-box;
+    padding: 0;
+    height: auto;
+    /* previously fixed - now flexible */
 }
 
+/* track follows slide height; center content vertically */
 .carousel-track {
     list-style: none;
     display: flex;
@@ -360,6 +365,7 @@ h3 {
     margin: 0;
     padding: 0;
     transition: transform 420ms cubic-bezier(.22, .9, .35, 1);
+    align-items: center;
 }
 
 .slide {
@@ -367,162 +373,33 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.6rem;
     box-sizing: border-box;
+    padding: 0.6rem;
 }
 
+/* show images in original format (no cropping)
+   - keep images bounded to viewport with max-width / max-height
+   - object-fit: contain ensures no cropping and preserves aspect ratio */
 .slide img {
     display: block;
-    margin: 0 auto;
+    width: auto;
+    height: auto;
     max-width: 100%;
-    max-height: 520px;
-    /* desktop cap */
+    max-height: 80vh;
+    /* prevents extremely tall images from overflowing */
+    object-fit: contain;
     border-radius: 10px;
     transition: transform .22s;
-    object-fit: contain;
-    /* default safe behavior */
 }
 
-/* landscape fills width */
-.slide img.landscape {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
+/* keep portrait/landscape class handling neutral to avoid older cropping rules */
+.slide img.portrait,
+.slide img.landscape {}
 
-/* portrait fills height without being cropped */
-.slide img.portrait {
-    width: auto;
-    height: 520px;
-    object-fit: contain;
-}
-
-/* smaller caps on narrow screens */
+/* responsive: reduce allowed height on small screens */
 @media (max-width: 760px) {
-
-    .slide img,
-    .slide img.portrait {
-        max-height: 320px;
-        height: auto;
-    }
-
-    .slide img.portrait {
-        height: 320px;
-    }
-}
-
-/* nav buttons (side of viewport) */
-.carousel-btn {
-    background: rgba(16, 42, 67, 0.9);
-    color: #fff;
-    border: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    font-size: 1.4rem;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    transition: transform 160ms, opacity 160ms;
-    box-shadow: 0 8px 18px rgba(15, 32, 64, 0.12);
-    flex-shrink: 0;
-    position: relative;
-    /* bring above track */
-    z-index: 20;
-}
-
-.carousel-btn:hover {
-    transform: translateY(-3px);
-    opacity: 0.95;
-}
-
-.carousel-btn:disabled {
-    opacity: 0.45;
-    cursor: default;
-}
-
-/* make the controls wrapper behave like the previous layout */
-.carousel-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-}
-
-.carousel-controls .prev {
-    order: 0;
-    flex-shrink: 0;
-}
-
-.carousel-controls .carousel-viewport {
-    order: 1;
-    flex: 1 1 auto;
-    min-width: 0;
-}
-
-.carousel-controls .next {
-    order: 2;
-    flex-shrink: 0;
-}
-
-/* ensure buttons sit visually at sides on wide screens */
-@media (min-width: 600px) {
-    .carousel-controls {
-        align-items: stretch;
-    }
-
-    .carousel-controls .prev,
-    .carousel-controls .next {
-        display: grid;
-        place-items: center;
-    }
-}
-
-/* position prev/next at left and right of viewport */
-.carousel .prev {
-    order: 0;
-}
-
-.carousel .next {
-    order: 2;
-}
-
-.carousel-viewport {
-    order: 1;
-}
-
-/* dots */
-.carousel-dots {
-    margin-top: 0.6rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.carousel-dot {
-    width: 10px;
-    height: 10px;
-    background: rgba(16, 42, 67, 0.12);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 140ms, background 140ms;
-}
-
-.carousel-dot.active {
-    background: var(--primary);
-    transform: scale(1.15);
-}
-
-/* responsive */
-@media (max-width: 760px) {
-    .carousel-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 1.1rem;
-    }
-
     .slide img {
-        max-height: 320px;
+        max-height: 60vh;
     }
 }
 
