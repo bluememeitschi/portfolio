@@ -394,6 +394,9 @@ h3 {
     transition: transform 160ms, opacity 160ms;
     box-shadow: 0 8px 18px rgba(15, 32, 64, 0.12);
     flex-shrink: 0;
+    position: relative;
+    /* bring above track */
+    z-index: 20;
 }
 
 .carousel-btn:hover {

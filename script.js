@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initCarousel(); // defined below
 });
 
-/* Populate carousel from images/manifest.json (simple, deterministic) */
+/* Populate carousel from images/manifest.json (preload + filter failed files) */
 async function populateCarouselFromImages() {
     const track = document.querySelector('.carousel-track');
     if (!track) return;
@@ -84,19 +84,46 @@ async function populateCarouselFromImages() {
             return;
         }
 
-        // build slides
+        // preload each image and keep only those that successfully load
+        const preload = (src) => new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(src);
+            img.onerror = () => reject(src);
+            img.src = src;
+        });
+
+        const attempts = await Promise.allSettled(
+            list.map(filename => preload(`images/${filename}`))
+        );
+
+        const loaded = attempts
+            .filter(r => r.status === 'fulfilled')
+            .map(r => r.value);
+
+        const failed = attempts
+            .filter(r => r.status === 'rejected')
+            .map(r => r.reason);
+
+        if (loaded.length === 0) {
+            console.warn('Carousel: no images could be loaded. Failed list:', failed);
+            return;
+        }
+
+        // build slides from successfully loaded sources
         track.innerHTML = '';
-        list.forEach(filename => {
+        loaded.forEach(src => {
             const li = document.createElement('li');
             li.className = 'slide';
             const img = document.createElement('img');
-            img.src = `images/${filename}`;
+            img.src = src;
             img.alt = '';
             li.appendChild(img);
             track.appendChild(li);
         });
+
+        console.log(`Carousel: loaded ${loaded.length} images. Failed: ${failed.length}`, { loaded, failed });
     } catch (err) {
-        console.error('Carousel: failed to load manifest.json', err);
+        console.error('Carousel: failed to load manifest.json or images', err);
     }
 }
 
@@ -116,16 +143,10 @@ function initCarousel() {
     let autoplayTimer = null;
     const AUTOPLAY_MS = 4500;
 
-    // build dots
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Slide ${i + 1}`);
-        dot.setAttribute('data-index', i);
-        dotsContainer.appendChild(dot);
-        dot.addEventListener('click', () => goTo(i));
-    });
+    // build dots (disabled - UI uses only side buttons)
+    if (dotsContainer) {
+        dotsContainer.innerHTML = ''; // keep element for accessibility, but don't populate dots
+    }
 
     function update() {
         const offset = -current * 100;
