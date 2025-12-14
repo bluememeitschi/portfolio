@@ -406,6 +406,43 @@ h3 {
     cursor: default;
 }
 
+/* make the controls wrapper behave like the previous layout */
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.carousel-controls .prev {
+    order: 0;
+    flex-shrink: 0;
+}
+
+.carousel-controls .carousel-viewport {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.carousel-controls .next {
+    order: 2;
+    flex-shrink: 0;
+}
+
+/* ensure buttons sit visually at sides on wide screens */
+@media (min-width: 600px) {
+    .carousel-controls {
+        align-items: stretch;
+    }
+
+    .carousel-controls .prev,
+    .carousel-controls .next {
+        display: grid;
+        place-items: center;
+    }
+}
+
 /* position prev/next at left and right of viewport */
 .carousel .prev {
     order: 0;

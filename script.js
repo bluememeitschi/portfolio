@@ -67,55 +67,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     initCarousel(); // defined below
 });
 
-/* Dynamically add image slides from images/photo{1..20}.{jpg,jpeg,png,webp} */
+/* Populate carousel from images/manifest.json (simple, deterministic) */
 async function populateCarouselFromImages() {
     const track = document.querySelector('.carousel-track');
     if (!track) return;
 
-    const exts = ['jpg', 'jpeg', 'png', 'webp'];
-    const maxIndex = 20;
-    const found = [];
-
-    function loadImage(src) {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(src);
-            img.onerror = () => reject(src);
-            img.src = src;
-        });
-    }
-
-    for (let i = 1; i <= maxIndex; i++) {
-        let got = false;
-        for (const ext of exts) {
-            const src = `images/photo${i}.${ext}`;
-            try {
-                // attempt to load; await to avoid flooding server with requests
-                await loadImage(src);
-                found.push(src);
-                got = true;
-                break;
-            } catch {
-                // try next extension
-            }
+    try {
+        const res = await fetch('images/manifest.json');
+        if (!res.ok) {
+            console.warn('Carousel: images/manifest.json not found (HTTP ' + res.status + ').');
+            return;
         }
-        // continue scanning all indices to collect multiple images
+        const list = await res.json();
+        if (!Array.isArray(list) || list.length === 0) {
+            console.warn('Carousel: manifest.json is empty or invalid.');
+            return;
+        }
+
+        // build slides
+        track.innerHTML = '';
+        list.forEach(filename => {
+            const li = document.createElement('li');
+            li.className = 'slide';
+            const img = document.createElement('img');
+            img.src = `images/${filename}`;
+            img.alt = '';
+            li.appendChild(img);
+            track.appendChild(li);
+        });
+    } catch (err) {
+        console.error('Carousel: failed to load manifest.json', err);
     }
-
-    // fallback: if none found, do nothing (keep any static slides if present)
-    if (found.length === 0) return;
-
-    // clear existing track content and build slides
-    track.innerHTML = '';
-    found.forEach(src => {
-        const li = document.createElement('li');
-        li.className = 'slide';
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-        li.appendChild(img);
-        track.appendChild(li);
-    });
 }
 
 /* Carousel init (reads .carousel-track after slides are present) */
