@@ -115,6 +115,13 @@ async function populateCarouselFromImages() {
             const li = document.createElement('li');
             li.className = 'slide';
             const img = document.createElement('img');
+
+            // assign classes based on natural size as soon as image data is available
+            img.onload = () => {
+                if (img.naturalHeight > img.naturalWidth) img.classList.add('portrait');
+                else img.classList.add('landscape');
+            };
+
             img.src = src;
             img.alt = '';
             li.appendChild(img);

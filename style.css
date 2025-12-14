@@ -372,11 +372,43 @@ h3 {
 }
 
 .slide img {
-    width: 100%;
-    max-height: 520px;
-    object-fit: cover;
-    border-radius: 10px;
     display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 520px;
+    /* desktop cap */
+    border-radius: 10px;
+    transition: transform .22s;
+    object-fit: contain;
+    /* default safe behavior */
+}
+
+/* landscape fills width */
+.slide img.landscape {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* portrait fills height without being cropped */
+.slide img.portrait {
+    width: auto;
+    height: 520px;
+    object-fit: contain;
+}
+
+/* smaller caps on narrow screens */
+@media (max-width: 760px) {
+
+    .slide img,
+    .slide img.portrait {
+        max-height: 320px;
+        height: auto;
+    }
+
+    .slide img.portrait {
+        height: 320px;
+    }
 }
 
 /* nav buttons (side of viewport) */
