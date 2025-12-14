@@ -9,14 +9,17 @@
 </head>
 
 <body>
-    <div class="layout">
-        <header class="site-header">
-            <nav class="navbar">
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-            </nav>
-        </header>
+    <!-- move header OUTSIDE the centered .layout so it can be full-width -->
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="#top">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#fotos">Fotos</a>
+        </nav>
+    </header>
 
+    <div class="layout" id="top">
         <aside class="sidebar-left" aria-label="Secondary navigation">
             <!-- optional left column content (links, brief bio, tags) -->
         </aside>
@@ -27,9 +30,19 @@
                     <h1>Livia Zaugg</h1>
                     <h2>Portfolio</h2>
                 </div>
+
+                <img src="profile.jpg" alt="Profile picture of Livia Zaugg" class="profile-pic" />
             </div>
 
-            <!-- Useless fact widget -->
+            <p>Hallo, Ich bin Livia und studiere Digital Business and AI.
+                In meiner Freizeit findet man mich meistens irgendwo draußen oder unterwegs: auf Reisen, beim Wandern
+                oder im Winter auf Ski und Snowboard. Gutes Essen gehört für mich genauso dazu wie meine Kamera,
+                die fast immer mitkommt, um kleine Momente festzuhalten.
+            </p>
+            <p>Und weil etwas Leichtigkeit nie schadet, tauchen hier auch ein paar unnötige, aber sympathische Fakten
+                auf.</p>
+
+            <!-- Useless fact widget moved under the intro paragraph -->
             <section class="fact-section">
                 <div class="fact-box">
                     <p id="useless-fact">Loading a useless fact…</p>
@@ -37,28 +50,50 @@
                 </div>
             </section>
 
-            <p>Welcome to my portfolio website! Here you can find information about my projects, skills, and
-                experiences.
-            </p>
-
             <h3 id="projects">Projects</h3>
-            <p>Here are some of my recent projects:</p>
+            <p>Eine kleine Übersicht meiner bisherigen Projekte: einige aus dem Studium, andere entstanden aus spontanen
+                Einfällen oder Neugier. Alles, was mir Spaß gemacht hat und mich ein Stück weitergebracht hat:</p>
             <ul class="project-list">
-                <li>Instagram Account</li>
-                <li>Webdesign for my Portfolio</li>
+                <li>Instagram Account hikerbirds</li>
+                <li>Webdesign für meine Portfolioseite</li>
+                <li>Snowboarden</li>
+                <li>Fotografie und Bildbearbeitung</li>
             </ul>
 
             <h3 id="skills">Skills</h3>
-            <p>Here are some of the skills I possess:</p>
-            <ul>
-                <li>Graphic Design</li>
-                <li>Project Management</li>
-                <li>Photography, Videography and Editing</li>
+            <p>Das sind die Fähigkeiten, die mich im Alltag begleiten. Ein bisschen Studium, ein bisschen Praxis und
+                vieles, was ich mir Schritt für Schritt selbst beigebracht habe:</p>
+            <ul class="project-list">
+                <li>Grafikdesign</li>
+                <li>Projektmanagement</li>
+                <li>Fotografie, Videografie und Bildbearbeitung</li>
+                <li>Was man sonst noch in den Bergen macht</li>
             </ul>
+
+            <!-- Fotos carousel moved to the bottom of the main content -->
+            <h3 id="fotos">Fotos</h3>
+            <p>Eine kleine Galerie mit Bildern.</p>
+            <section class="gallery">
+                <div class="carousel" aria-label="Foto Galerie">
+                    <!-- group controls so dots can sit below -->
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev" aria-label="Vorheriges">‹</button>
+                        <div class="carousel-viewport">
+                            <ul class="carousel-track">
+                                <!-- Slides are generated dynamically from images/photo1..photo20.(jpg|jpeg|png|webp) -->
+                            </ul>
+                        </div>
+                        <button class="carousel-btn next" aria-label="Nächstes">›</button>
+                    </div>
+
+                    <!-- dots placed below the controls / viewport -->
+                    <div class="carousel-dots" role="tablist" aria-label="Galerie Seiten"></div>
+                </div>
+            </section>
         </main>
 
         <aside class="sidebar-right" aria-label="Profile">
-            <img src="profile.jpg" alt="Profile picture of Livia Zaugg" class="profile-pic" />
+            <!-- profile picture removed from here so it sits next to the name/title -->
         </aside>
 
         <footer class="site-footer">
